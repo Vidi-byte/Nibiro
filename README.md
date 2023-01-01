@@ -116,3 +116,11 @@ nibid tx staking create-validator \
 ```
 nibid q bank balances $(nibid keys show wallet -a)
 ```
+#### Unjail validator
+```
+nibid tx slashing unjail --from wallet --chain-id nibiru-testnet-2 --gas-adjustment 1.4 --gas auto --gas-prices 0.025unibi -y
+```
+#### Check service logs
+```
+sudo journalctl -u nibid -f --no-hostname -o cat
+```
