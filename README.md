@@ -84,23 +84,23 @@ sudo systemctl start nibid && journalctl -u nibid -f --no-hostname -o cat
 ## Below enter one of the commands to create a new wallet or restore the old one depending on what you need. 
 #### Add new key 
 ```
-defundd keys add wallet
+nibid keys add wallet
 ```
 #### Recover existing key
 ```
-defundd keys add wallet --recover
+nibid keys add wallet --recover
 ```
 #### Wait 1-2 hours until the node is fully synchronized and create a validator 
 ## Please make sure you have adjusted moniker, identity, details and website to match your values. (You can leave just "YOUR_MONIKER_NAME" and other values such as "YOUR_KEYBASE_ID", "YOUR_DETAILS", "YOUR_WEBSITE_URL" just erase if you do not have them.)  
 ```
-defundd tx staking create-validator \
---amount=1000000ufetf \
---pubkey=$(defundd tendermint show-validator) \
+nibid tx staking create-validator \
+--amount=1000000unibi \
+--pubkey=$(nibid tendermint show-validator) \
 --moniker="YOUR_MONIKER_NAME" \
 --identity="YOUR_KEYBASE_ID" \
 --details="YOUR_DETAILS" \
 --website="YOUR_WEBSITE_URL"
---chain-id=defund-private-3 \
+--chain-id=nibiru-testnet-2 \
 --commission-rate=0.05 \
 --commission-max-rate=0.20 \
 --commission-max-change-rate=0.01 \
@@ -108,5 +108,11 @@ defundd tx staking create-validator \
 --from=wallet \
 --gas-adjustment=1.4 \
 --gas=auto \
+--gas-prices=0.025unibi \
 -y
+```
+## Useful commands
+#### Query wallet balance
+```
+nibid q bank balances $(nibid keys show wallet -a)
 ```
